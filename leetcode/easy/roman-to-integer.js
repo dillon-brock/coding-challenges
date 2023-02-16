@@ -50,3 +50,5 @@ var romanToInt = function(s) {
   }
   return totalValue;
 };
+
+console.log('flower'.substring(0, 0));
