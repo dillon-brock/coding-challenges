@@ -33,38 +33,47 @@ Output: [8,9,9,9,0,0,0,1]
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var addTwoNumbers = function(l1, l2) {
 
-    let carryOver = 0;    
+// const equalizeLists = (l1, l2) => {
+//     while (l1.next !== null || l2.next !== null) {
+//         if (l1.next == null) l1.next = new ListNode();
+//         if (l2.next == null) l2.next = new ListNode();
+//         l1 = l1.next;
+//         l2 = l2.next;
+//     }
+// }
 
+const addTwoNumbers = function(l1, l2) {
+    // fill in shorter list with more nodes so both lists are the same length
+    // this increases time complexity but absolutely improves readibility of code
+    // equalizeLists(l1, l2);
+    
     let result = new ListNode();
     let currentResultNode = result;
-    while (l1 || l2) {
-        let digitSum;
-        if (l2 && l1) {
-            digitSum = l1.val + l2.val;
-        } else {
-            digitSum = l1 !== null ? l1.val : l2.val;
-        }
-        if (digitSum >= 10) {
+
+    while (l1) {
+        let carryOver = 0;    
+        let digitSum = l1.val + l2.val;
+        if (digitSum >= 10 || digitSum + currentResultNode.val >= 10) {
             carryOver = 1;
             digitSum -= 10;
         } else {
             carryOver = 0;
         }
-
-        if (digitSum + currentResultNode.val >= 10) {
-            carryOver = 1;
-            digitSum -= 10;
-        }
         currentResultNode.val += digitSum;
-        if ((l1 && l1.next) || (l2 && l2.next) || carryOver === 1) {
+        // add new node to result if there are remaining nodes in the input 
+        // or a remaining carryOver value
+        if (l1.next || carryOver)
             currentResultNode.next = new ListNode(carryOver);
-        }
         currentResultNode = currentResultNode.next;
 
-        if (l1 !== null) l1 = l1.next;
-        if (l2 !== null) l2 = l2.next;
+        if (l1.next || l2.next) {
+            l1 = l1.next || new ListNode();
+            l2 = l2.next || new ListNode();
+            continue;
+        }
+        l1 = l1.next;
+        l2 = l2.next;
     }
 
     return result;
