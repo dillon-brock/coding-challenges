@@ -1,7 +1,6 @@
 public class Dinglemouse {
 
   public static int kookaCounter(final String laughing) {
-    // Your code here!
     String current = "";
     int birds = 0;
     for (String c : laughing.split("")) {
