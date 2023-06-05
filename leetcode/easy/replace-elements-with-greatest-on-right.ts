@@ -16,3 +16,17 @@ function replaceElements(arr: number[]): number[] {
       return maxRemaining;
   });
 };
+
+
+function replaceElementsv2(arr: number[]): number[] {
+  let maxVal: number = arr[arr.length - 1];
+  arr[arr.length - 1] = -1;
+
+  for (let i = arr.length - 2; i >= 0; i--) {
+      let temp = arr[i];
+      arr[i] = maxVal;
+      if (temp > maxVal) maxVal = temp;
+  }
+
+  return arr;
+};
