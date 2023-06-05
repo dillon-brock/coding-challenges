@@ -1,4 +1,4 @@
-function isValid(s: string): boolean {
+function isValidTS(s: string): boolean {
   const openers = ['(', '{', '['];
   const pairs: { [key: string]: string } = {
       ')': '(',
